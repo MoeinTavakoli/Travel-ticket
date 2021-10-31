@@ -20,16 +20,14 @@
 
 const config = {
     databse: {
-        Host: "localhost",
-        Port: 5432,
-        User: "postgres",
-        Password: '2283',
-        Database: "postgres"
+        host: '127.0.0.1',
+        user: 'postgres',
+        database: 'travel',
+        password: '2283',
+        port: 5432,
+    
     }
 }
 
-
-
-console.log(typeof config.databse.Password);
 
 module.exports = config
