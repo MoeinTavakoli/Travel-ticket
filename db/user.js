@@ -6,7 +6,7 @@ client.connect()
 
 
 async function getAllUserDB() {
-    const res = await client.query("SELECT * FROM users")
+    const res = await client.query("SELECT * FROM users ORDER BY id DESC")
     return res.rows;
 }
 
