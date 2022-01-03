@@ -7,11 +7,13 @@ const signupSchema = Joi.object({
         .trim()
         .required()
         .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
+    role: Joi.string().min(4).required()
 });
 
 async function signupSchemaVerify(req, res, next) {
-    req.body.username = req.body.username.trim() 
-    req.body.password = req.body.password.trim() 
+    req.body.username = req.body.username.trim()
+    req.body.password = req.body.password.trim()
+    req.body.role = req.body.role.trim()
 
     const { error } = signupSchema.validate(req.body);
     if (error) {
@@ -26,4 +28,4 @@ async function signupSchemaVerify(req, res, next) {
 
 
 
-module.exports =  signupSchemaVerify 
+module.exports = signupSchemaVerify 

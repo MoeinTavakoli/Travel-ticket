@@ -5,8 +5,8 @@ const { hash } = require("../service/hash/bcrypt")
 client.connect()
 
 
-async function getAllUserDB() {
-    const res = await client.query("SELECT * FROM users WHERE role = 'user' ") //ORDER BY id DESC
+async function getAlladmins() {
+    const res = await client.query("SELECT * FROM users WHERE role = admin ORDER BY id DESC")
     return res.rows;
 }
 
