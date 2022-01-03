@@ -48,9 +48,12 @@ async function loginDB(username, password) {
 
 
 
+
+
+
 module.exports = {
     signupDB,
     loginDB,
     getAlladmins,
-    getUser
+    getUser,
 }
