@@ -10,7 +10,6 @@ app.post('/login', validator.loginSchema, controller.login)
 
 app.get('/', controller.getAllUser)
 
-app.post("/dashboard/request", controller.requestTravale)
 
 
 module.exports = app

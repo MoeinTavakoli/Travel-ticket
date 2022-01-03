@@ -1,6 +1,7 @@
 const { signupDB, loginDB, getAllUserDB, getUser } = require("../../db/user")
 const { generateExpirationToken, decodeToken } = require("../../service/jwt/jwt")
 
+const { getAllrequest } = require("../../db/request")
 
 
 async function signup(req, res) {
