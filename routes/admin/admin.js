@@ -14,7 +14,8 @@ app.get('/', controller.getAllUser)
 
 app.post("/dashboard/request", controller.getAllRequest)
 
-app.post("/dashboard/travel", travelCtl.addTravel)
+app.post("/dashboard/travel", travelCtl.createTravel)
+app.delete("/dashboard/travel", travelCtl.deleteTravel)
 
 
 module.exports = app

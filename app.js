@@ -10,6 +10,10 @@ require("./db/connection")
 app.use('/user', require("./routes/user"))
 app.use('/admin', require('./routes/admin'))
 
+const { decodeToken } = require("./service/jwt")
+const { addTravel, removeTravel } = require("./db/travel")
+
+
 
 
 
