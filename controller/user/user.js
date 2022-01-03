@@ -1,7 +1,8 @@
+const { addRequest, idValidation } = require("../../db/request")
 const { signupDB, loginDB, getAllUserDB, getUser } = require("../../db/user")
 const { generateExpirationToken } = require("../../service/jwt")
 
-
+const { decodeToken } = require("../../service/jwt")
 
 async function signup(req, res) {
     try {
@@ -17,8 +18,6 @@ async function signup(req, res) {
         throw err
     }
 }
-
-
 
 
 async function login(req, res) {
@@ -51,8 +50,39 @@ async function getAllUser(req, res) {
 
 
 
+async function requestTravale(req, res) {
+    // try {
+    const token = req.headers.token
+    const id = decodeToken(token).id
+    const { source, destination } = req.body //, date
+
+    // bere toye middleware 
+    if (!id) {
+        res.status(400).json({ success: false, error: " id not found !" })
+    }
+
+    if (!(await idValidation(id, "user"))) {
+        res.status(400).json({ success: false, error: " user not found " })
+    }
+    // bere to middleware
+
+    await addRequest(id, source, destination)
+    res.status(200).json({ success: true, message: "request accepted !" })
+
+}
+// catch (error) {
+//     res.json({ success: false, error })
+// }
+// }
+// }
+
+
+
+
+
 module.exports = {
     signup,
     login,
-    getAllUser
+    getAllUser,
+    requestTravale
 }
