@@ -23,12 +23,20 @@ async function removeTravel(travel_id) { //, date
     }
 }
 
+async function editTravel(travel_id, source, destination, cost) { //, date
+    try {
+        const res = await client.query("UPDATE travel SET source = $1 , destination = $2 , cost = $3  WHERE travel_id = $4;", [source, destination, cost, travel_id])
+        return res.rowCount;
+    } catch (error) {
+        return false
+    }
+}
 
 
 
 
 module.exports = {
     addTravel,
-    removeTravel
-
+    removeTravel,
+    editTravel
 }
