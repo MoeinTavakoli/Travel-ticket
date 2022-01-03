@@ -1,8 +1,8 @@
 const express = require("express")
 const app = express()
 
-const controller = require("../controller/admin")
-const validator = require("../service/joi/schema")
+const controller = require("../../controller/user/user")
+const validator = require("../../service/joi/schema")
 
 app.post('/signup', validator.signupSchema, controller.signup)
 

@@ -9,7 +9,7 @@ require("./db/connection")
 
 
 
-app.use('/user', require("./routes/users"))
+app.use('/user', require("./routes/user"))
 app.use('/admin', require('./routes/admin'))
 
 

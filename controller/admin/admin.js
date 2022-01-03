@@ -1,5 +1,5 @@
-const { signupDB, loginDB, getAllUserDB, getAdmin } = require("../db/user")
-const { generateExpirationToken } = require("../service/jwt/jwt")
+const { signupDB, loginDB, getAllUserDB, getAdmin } = require("../../db/user")
+const { generateExpirationToken } = require("../../service/jwt/jwt")
 
 
 
