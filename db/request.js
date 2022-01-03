@@ -24,8 +24,16 @@ async function idValidation(id, role) {
 }
 
 
+async function getAllrequest() { //, date
+    const res = await client.query("SELECT * FROM request")
+    return res.rows;
+}
+
+
+
 
 module.exports = {
     addRequest,
-    idValidation
+    idValidation,
+    getAllrequest
 }

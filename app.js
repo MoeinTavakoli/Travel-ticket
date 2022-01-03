@@ -8,13 +8,12 @@ app.use(bodyParser.json())
 require("./db/connection")
 
 
-
 app.use('/user', require("./routes/user"))
 app.use('/admin', require('./routes/admin'))
 
 
 
-
+app.use("/admin/dashboard/create", )
 
 
 
