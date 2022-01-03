@@ -7,10 +7,29 @@ app.use(bodyParser.json())
 
 require("./db/connection")
 
+const { decodeToken } = require("./service/jwt")
+const { addRequest } = require("./db/request")
 
 
 app.use('/user', require("./routes/user"))
 app.use('/admin', require('./routes/admin'))
+
+
+app.post("/user/dashboard/request", async (req, res) => {
+  try {
+    const token = req.headers.token
+    const id = decodeToken(token).id
+    const { source, destination } = req.body //, date
+    if (!id) {
+      res.status(400).json({ success: false, error: " id not found !" })
+    }
+    await addRequest(id, source, destination)
+    res.status(200).json({ success: true, message: "request accepted !" })
+
+  } catch (error) {
+    res.json({ success: false, error })
+  }
+})
 
 
 
