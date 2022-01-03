@@ -6,12 +6,12 @@ client.connect()
 
 
 async function getAlladmins() {
-    const res = await client.query("SELECT * FROM users WHERE role = admin ORDER BY id DESC")
+    const res = await client.query("SELECT * FROM users WHERE role like 'admin' ORDER BY id DESC")
     return res.rows;
 }
 
 async function getUser(username, password) {
-    const res = await client.query("SELECT id FROM users WHERE username = $1 AND password = $2 LIMIT 1", [username, await hash(password)])
+    const res = await client.query("SELECT id FROM users WHERE username = $1 AND password = $2 WHERE role like 'admin' LIMIT 1", [username, await hash(password)])
     return res.rows;
 }
 
@@ -33,7 +33,7 @@ async function signupDB(username, password, role) {
 // req.pass , username , pass 
 async function loginDB(username, password) {
     try {
-        const result = await client.query("SELECT * FROM users WHERE username = $1 AND password = $2 LIMIT 1", [username, await hash(password)])
+        const result = await client.query("SELECT * FROM users WHERE username = $1 AND password = $2 WHERE role like 'admin' LIMIT 1", [username, await hash(password)])
         if (result.rows.length != 0) {
             return true
         }
@@ -51,6 +51,6 @@ async function loginDB(username, password) {
 module.exports = {
     signupDB,
     loginDB,
-    getAllUserDB,
+    getAlladmins,
     getUser
 }

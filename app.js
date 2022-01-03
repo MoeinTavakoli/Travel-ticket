@@ -9,8 +9,8 @@ require("./db/connection")
 
 
 
-app.use('/user' , require("./routes/users"))
-
+app.use('/user', require("./routes/users"))
+app.use('/admin', require('./routes/admin'))
 
 
 
@@ -18,5 +18,5 @@ app.use('/user' , require("./routes/users"))
 
 
 app.listen(port = 3000, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-  })
+  console.log(`Example app listening at http://localhost:${port}`)
+})
