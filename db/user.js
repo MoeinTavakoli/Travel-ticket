@@ -10,7 +10,7 @@ async function getAllUserDB() {
     return res.rows;
 }
 
-async function getAdmin(username, password, role = 'user') {
+async function getUser(username, password, role = 'user') {
     const res = await client.query("SELECT id FROM users WHERE username = $1 AND password = $2 AND role = $3 LIMIT 1", [username, await hash(password), role])
     return res.rows;
 }
@@ -52,5 +52,5 @@ module.exports = {
     signupDB,
     loginDB,
     getAllUserDB,
-    getAdmin
+    getUser
 }

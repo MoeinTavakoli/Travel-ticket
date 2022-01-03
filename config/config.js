@@ -6,7 +6,9 @@ const config = {
         database: 'travel',
         password: '2283',
         port: 5432,
-    
+    },
+    jwt: {
+        secret: "asdasdloska"
     }
 }
 

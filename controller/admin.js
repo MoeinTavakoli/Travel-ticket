@@ -1,5 +1,5 @@
 const { signupDB, loginDB, getAllUserDB, getAdmin } = require("../db/user")
-
+const { generateExpirationToken } = require("../service/jwt/jwt")
 
 
 
@@ -26,7 +26,12 @@ async function login(req, res) {
     try {
         const { username, password } = req.body
         const result = await loginDB(username, password, "admin")
-        res.send(result)
+        if (result) {
+            res.status(200).json({ success: true, token: generateExpirationToken(username, password) })
+        }
+        else {
+            res.status(400).json({ success: false, error: "username OR password is not exist" })
+        }
     }
     catch (err) {
         throw err
