@@ -14,8 +14,8 @@ function decodeToken(token) {
   return jwt.decode(token);
 }
 
-function generateExpirationToken(username, userID) {
-  const obj = { username: username, ID: userID };
+function generateExpirationToken(userID) {
+  const obj = { id: userID };
   return jwt.sign(obj, config.jwt.secret, { expiresIn: "20h" });
 }
 

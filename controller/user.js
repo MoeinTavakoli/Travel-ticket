@@ -24,9 +24,10 @@ async function signup(req, res) {
 async function login(req, res) {
     try {
         const { username, password } = req.body
-        const result = await loginDB(username, password)
+        const result = await loginDB(username, password, "user")
         if (result) {
-            res.status(200).json({ success: true, token: generateExpirationToken(username, password) })
+            user = result[0]
+            res.status(200).json({ success: true, token: generateExpirationToken(user.id) })
         }
         else {
             res.status(400).json({ success: false, error: "username or password is not exist" })

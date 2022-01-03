@@ -27,7 +27,8 @@ async function login(req, res) {
         const { username, password } = req.body
         const result = await loginDB(username, password, "admin")
         if (result) {
-            res.status(200).json({ success: true, token: generateExpirationToken(username, password) })
+            user = result[0]
+            res.status(200).json({ success: true, token: generateExpirationToken(user.id) })
         }
         else {
             res.status(400).json({ success: false, error: "username OR password is not exist" })

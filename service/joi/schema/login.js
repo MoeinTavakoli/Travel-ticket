@@ -7,6 +7,7 @@ const loginSchema = Joi.object({
         .trim()
         .required()
         .pattern(new RegExp("^[a-zA-Z0-9]{3,30}$")),
+    role: Joi.string()
 });
 
 async function loginSchemaVerify(req, res, next) {

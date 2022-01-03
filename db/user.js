@@ -35,7 +35,7 @@ async function loginDB(username, password, role) {
     try {
         const result = await client.query("SELECT * FROM users WHERE username = $1 AND password = $2 AND role = $3 LIMIT 1", [username, await hash(password), role])
         if (result.rows.length != 0) {
-            return true
+            return result.rows
         }
         else return false
     }
