@@ -21,11 +21,11 @@ app.post("/dashboard/request", controller.getAllRequest)
 app.post("/dashboard/travel", travelCtl.createTravel)
 app.delete("/dashboard/travel", travelCtl.deleteTravel)
 app.put("/dashboard/travel", travelCtl.updateTravel)
-app.get("/dashboard/travel/:travel_id", validator.travelIdSchema, travelCtl.getTravel)
-app.get("/dashboard/travel/info/:travel_id", validator.travelIdSchema, travelCtl.getTravelInfo)
+app.get("/dashboard/travel/:travel_id", validator.tokenSchema, validator.travelIdSchema, travelCtl.getTravel)
+app.get("/dashboard/travel/info/:travel_id", validator.tokenSchema, validator.travelIdSchema, travelCtl.getTravelInfo)
 
-app.get("/dashboard/travel/info/:travel_id/:user_id", validator.travelIdSchema, validator.userIdSchema, passengerCtl.searchUserInTravel)
-app.get("/dashboard/travel/size/:travel_id", validator.travelIdSchema, travelCtl.getSizePassengerTravel)
+app.get("/dashboard/travel/info/:travel_id/:user_id", validator.tokenSchema, validator.travelIdSchema, validator.userIdSchema, passengerCtl.searchUserInTravel)
+app.get("/dashboard/travel/size/:travel_id", validator.tokenSchema, validator.travelIdSchema, travelCtl.getSizePassengerTravel)
 
 
 

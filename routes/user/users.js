@@ -16,7 +16,7 @@ app.get('/', controller.getAllUser)
 
 
 // travel 
-app.post('/travel/reserve', travelCtl.reserveTravel)
+app.post('/travel/reserve', validator.tokenSchema, travelCtl.reserveTravel)
 
 
 module.exports = app

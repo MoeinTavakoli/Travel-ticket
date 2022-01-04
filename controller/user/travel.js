@@ -13,7 +13,6 @@ async function reserveTravel(req, res) {
         const user_id = decodeToken(token).id
         const { travel_id } = req.body
 
-
         const resultArray = await getPassngersTravel(travel_id)
         if (!resultArray) {
             return res.status(400).json({ success: false, error: "travel not found " })
