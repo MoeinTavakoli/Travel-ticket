@@ -12,7 +12,6 @@ app.post('/signup', validator.signupSchema, controller.signup)
 
 app.post('/login', validator.loginSchema, controller.login)
 
-app.get('/', validator.tokenSchema, verifyToken, controller.getAllUser)
 
 
 // travel 

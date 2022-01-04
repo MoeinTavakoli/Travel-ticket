@@ -12,7 +12,12 @@ async function signup(req, res) {
             return res.status(400).json({ error: "user is exist" })
         }
         const result = await signupDB(username, password, "user")
-        return res.send(result)
+        if (result) {
+            return res.status(200).json({ success: true })
+        }
+        else {
+            return res.status(400).json({ success: false })
+        }
     }
     catch (err) {
         throw err
@@ -37,15 +42,6 @@ async function login(req, res) {
     }
 }
 
-
-async function getAllUser(req, res) {
-    try {
-        res.send(await getAllUserDB())
-    }
-    catch (err) {
-        throw err
-    }
-}
 
 
 
@@ -83,6 +79,5 @@ async function requestTravale(req, res) {
 module.exports = {
     signup,
     login,
-    getAllUser,
     requestTravale
 }
