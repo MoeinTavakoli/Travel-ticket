@@ -39,7 +39,6 @@ async function signupDB(username, password, role) {
 }
 
 
-// req.pass , username , pass 
 async function loginDB(username, password, role) {
     try {
         const result = await client.query("SELECT * FROM users WHERE username = $1 AND password = $2 AND role = $3 LIMIT 1", [username, await hash(password), role])

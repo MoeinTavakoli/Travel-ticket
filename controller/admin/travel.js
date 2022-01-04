@@ -86,7 +86,7 @@ async function updateTravel(req, res) {
 
 async function getTravel(req, res) {
     try {
-        const travel_id = req.params.id
+        const travel_id = req.params.travel_id
 
         const token = req.headers.token
         const admin_id = decodeToken(token).id
@@ -110,7 +110,7 @@ async function getTravel(req, res) {
 
 async function getTravelInfo(req, res) {
     const travel_id = req.params.travel_id
-    
+
     const token = req.headers.token
     const admin_id = decodeToken(token).id
     if (!admin_id) {
@@ -128,6 +128,25 @@ async function getTravelInfo(req, res) {
 
 
 
+async function getSizePassengerTravel(req, res) {
+    const travel_id = req.params.travel_id
+
+    const token = req.headers.token
+    const admin_id = decodeToken(token).id
+    if (!admin_id) {
+        res.status(400).json({ success: false, error: "id is not identify" })
+    }
+
+    const resultArray = await getPassngersTravel(travel_id)
+    if (!resultArray) {
+        return res.status(400).json({ success: false, error: "travel not found " })
+    }
+    const array = resultArray.rows[0].passengers_id
+    res.status(200).json({ "travel lenght reserved ": array.length })
+}
+
+
+
 
 
 module.exports = {
@@ -135,5 +154,6 @@ module.exports = {
     deleteTravel,
     updateTravel,
     getTravel,
-    getTravelInfo
+    getTravelInfo,
+    getSizePassengerTravel
 }
