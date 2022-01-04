@@ -9,8 +9,7 @@ const { getUserByID } = require("../../db/user")
 
 async function reserveTravel(req, res) {
     try {
-        const token = req.headers.token
-        const user_id = decodeToken(token).id
+        const user_id = req.id
         const { travel_id } = req.body
 
         const resultArray = await getPassngersTravel(travel_id)
@@ -41,12 +40,6 @@ async function reserveTravel(req, res) {
 async function searchUserInTravel(req, res) {
     const travel_id = req.params.travel_id
     const user_id = req.params.user_id
-
-    const token = req.headers.token
-    const admin_id = decodeToken(token).id
-    if (!admin_id) {
-        res.status(400).json({ success: false, error: "id is not identify" })
-    }
 
     const resultArray = await getPassngersTravel(travel_id)
     if (!resultArray) {

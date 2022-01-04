@@ -72,11 +72,6 @@ async function getTravel(req, res) {
     try {
         const travel_id = req.params.travel_id
 
-        const admin_id = req.id
-        if (!admin_id) {
-            res.status(400).json({ success: false, error: "id is not identify" })
-        }
-
         const travel = await getTravelByID(travel_id)
         if (travel.rowCount == 0) {
             res.status(400).json({ success: false, message: "travel not found !!!" })
@@ -94,11 +89,6 @@ async function getTravel(req, res) {
 async function getTravelInfo(req, res) {
     const travel_id = req.params.travel_id
 
-    const token = req.headers.token
-    const admin_id = decodeToken(token).id
-    if (!admin_id) {
-        res.status(400).json({ success: false, error: "id is not identify" })
-    }
 
     const resPassengerTravel = await getPassngersTravel(travel_id)
     if (!resPassengerTravel) {
@@ -113,13 +103,6 @@ async function getTravelInfo(req, res) {
 
 async function getSizePassengerTravel(req, res) {
     const travel_id = req.params.travel_id
-
-    const token = req.headers.token
-    console.log(`log tooye ctl id : ${req.id}`);
-    const admin_id = decodeToken(token).id
-    if (!admin_id) {
-        res.status(400).json({ success: false, error: "id is not identify" })
-    }
 
     const resultArray = await getPassngersTravel(travel_id)
     if (!resultArray) {
