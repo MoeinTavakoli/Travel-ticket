@@ -4,7 +4,9 @@ const app = express()
 const controller = require("../../controller/admin")
 const travelCtl = require("../../controller/admin/travel")
 const passengerCtl = require("../../controller/user/travel")
+
 const validator = require("../../service/joi/schema")
+
 
 app.post('/signup', validator.signupSchema, controller.signup)
 
@@ -19,11 +21,11 @@ app.post("/dashboard/request", controller.getAllRequest)
 app.post("/dashboard/travel", travelCtl.createTravel)
 app.delete("/dashboard/travel", travelCtl.deleteTravel)
 app.put("/dashboard/travel", travelCtl.updateTravel)
-app.get("/dashboard/travel/:travel_id", travelCtl.getTravel)
-app.get("/dashboard/travel/info/:travel_id", travelCtl.getTravelInfo)
+app.get("/dashboard/travel/:travel_id", validator.travelIdSchema, travelCtl.getTravel)
+app.get("/dashboard/travel/info/:travel_id", validator.travelIdSchema, travelCtl.getTravelInfo)
 
-app.get("/dashboard/travel/info/:travel_id/:user_id", passengerCtl.searchUserInTravel)
-app.get("/dashboard/travel/size/:travel_id", travelCtl.getSizePassengerTravel)
+app.get("/dashboard/travel/info/:travel_id/:user_id", validator.travelIdSchema, validator.userIdSchema, passengerCtl.searchUserInTravel)
+app.get("/dashboard/travel/size/:travel_id", validator.travelIdSchema, travelCtl.getSizePassengerTravel)
 
 
 
