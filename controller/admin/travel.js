@@ -1,6 +1,7 @@
 
 const { decodeToken } = require("../../service/jwt/jwt")
 const { addTravel, removeTravel, editTravel, getTravelByID } = require("../../db/travel")
+const { getPassngersTravel } = require("../../db/user-travel")
 
 
 async function createTravel(req, res) { //
@@ -107,9 +108,32 @@ async function getTravel(req, res) {
 
 
 
+async function getTravelInfo(req, res) {
+    const travel_id = req.params.travel_id
+    
+    const token = req.headers.token
+    const admin_id = decodeToken(token).id
+    if (!admin_id) {
+        res.status(400).json({ success: false, error: "id is not identify" })
+    }
+
+    const resPassengerTravel = await getPassngersTravel(travel_id)
+    if (!resPassengerTravel) {
+        return res.status(400).json({ success: false, error: "travel not found" })
+    }
+    const arrayPassengers = resPassengerTravel.rows[0].passengers_id
+
+    res.status(200).json({ success: false, passnegers: arrayPassengers })
+}
+
+
+
+
+
 module.exports = {
     createTravel,
     deleteTravel,
     updateTravel,
-    getTravel
+    getTravel,
+    getTravelInfo
 }

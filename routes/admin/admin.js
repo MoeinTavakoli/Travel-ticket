@@ -20,6 +20,10 @@ app.post("/dashboard/travel", travelCtl.createTravel)
 app.delete("/dashboard/travel", travelCtl.deleteTravel)
 app.put("/dashboard/travel", travelCtl.updateTravel)
 app.get("/dashboard/travel/:id", travelCtl.getTravel)
+app.get("/dashboard/travel/info/:travel_id", travelCtl.getTravelInfo)
+
+
+
 
 
 module.exports = app
