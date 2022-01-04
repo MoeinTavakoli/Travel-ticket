@@ -4,7 +4,7 @@ const { decodeToken } = require("../../service/jwt")
 
 // db
 const { addUserToTravel, getPassngersTravel } = require("../../db/user-travel")
-
+const { getUserByID } = require("../../db/user")
 
 
 async function reserveTravel(req, res) {
@@ -39,7 +39,29 @@ async function reserveTravel(req, res) {
 
 
 
+async function searchUserInTravel(req, res) {
+    const travel_id = req.params.travel_id
+    const user_id = req.params.user_id
 
+    const token = req.headers.token
+    const admin_id = decodeToken(token).id
+    if (!admin_id) {
+        res.status(400).json({ success: false, error: "id is not identify" })
+    }
+
+    const resultArray = await getPassngersTravel(travel_id)
+    if (!resultArray) {
+        return res.status(400).json({ success: false, error: "travel not found " })
+    }
+    const array = resultArray.rows[0].passengers_id
+    const existUser = isInArray(array, user_id)
+    if (!existUser) {
+        return res.status(400).json({ success: false, error: "user is not exist in this travel " })
+    }
+
+    const information = await getUserByID(user_id)
+    res.status(200).json({ information })
+}
 
 
 
@@ -48,5 +70,6 @@ async function reserveTravel(req, res) {
 
 
 module.exports = {
-    reserveTravel
+    reserveTravel,
+    searchUserInTravel
 }

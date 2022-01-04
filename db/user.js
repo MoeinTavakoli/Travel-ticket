@@ -15,6 +15,15 @@ async function getUser(username, password, role = 'user') {
     return res.rows;
 }
 
+async function getUserByID(id) {
+    try {
+        const res = await client.query("SELECT username , city ,birthday ,  role FROM users WHERE id = $1 LIMIT 1", [id])
+        return res.rows;
+    } catch (error) {
+        return false
+    }
+}
+
 
 async function signupDB(username, password, role) {
     try {
@@ -52,5 +61,6 @@ module.exports = {
     signupDB,
     loginDB,
     getAllUserDB,
-    getUser
+    getUser,
+    getUserByID
 }

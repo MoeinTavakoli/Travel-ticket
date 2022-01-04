@@ -14,10 +14,11 @@ const { decodeToken } = require("./service/jwt")
 // const { getTravel } = require("./db/travel")
 const { addUserToTravel, getPassngersTravel } = require("./db/user-travel")
 const isInArray = require("./service/utils/findInArray")
+const { getUserByID } = require("./db/user")
 
-
-/*app.get("/admin/dashboard/travel/info/:travel_id", async (req, res) => {
+app.get("/admin/dashboard/travel/info/:travel_id/:user_id", async (req, res) => {
   const travel_id = req.params.travel_id
+  const user_id = req.params.user_id
 
   const token = req.headers.token
   const admin_id = decodeToken(token).id
@@ -25,8 +26,20 @@ const isInArray = require("./service/utils/findInArray")
     res.status(400).json({ success: false, error: "id is not identify" })
   }
 
+  const resultArray = await getPassngersTravel(travel_id)
+  if (!resultArray) {
+    return res.status(400).json({ success: false, error: "travel not found " })
+  }
+  const array = resultArray.rows[0].passengers_id
+  const existUser = isInArray(array, user_id)
+  console.log(existUser);
+  if (!existUser) {
+    return res.status(400).json({ success: false, error: "user is not exist in this travel " })
+  }
+
+  const information = await getUserByID(user_id)
+  res.json({ information })
 })
-*/
 
 
 app.listen(port = 3000, () => {

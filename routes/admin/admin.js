@@ -3,7 +3,7 @@ const app = express()
 
 const controller = require("../../controller/admin")
 const travelCtl = require("../../controller/admin/travel")
-
+const passengerCtl = require("../../controller/user/travel")
 const validator = require("../../service/joi/schema")
 
 app.post('/signup', validator.signupSchema, controller.signup)
@@ -21,6 +21,8 @@ app.delete("/dashboard/travel", travelCtl.deleteTravel)
 app.put("/dashboard/travel", travelCtl.updateTravel)
 app.get("/dashboard/travel/:id", travelCtl.getTravel)
 app.get("/dashboard/travel/info/:travel_id", travelCtl.getTravelInfo)
+
+app.get("/dashboard/travel/info/:travel_id/:user_id", passengerCtl.searchUserInTravel)
 
 
 
