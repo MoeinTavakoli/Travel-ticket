@@ -32,11 +32,21 @@ async function editTravel(travel_id, source, destination, cost) { //, date
     }
 }
 
+async function getTravelByID(travel_id) { //, date
+    try {
+        const res = await client.query("SELECT * FROM travel WHERE travel_id = $1", [travel_id])
+
+        return res;
+    } catch (error) {
+        return false
+    }
+}
 
 
 
 module.exports = {
     addTravel,
     removeTravel,
-    editTravel
+    editTravel,
+    getTravelByID
 }
