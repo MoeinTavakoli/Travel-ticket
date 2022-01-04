@@ -132,6 +132,7 @@ async function getSizePassengerTravel(req, res) {
     const travel_id = req.params.travel_id
 
     const token = req.headers.token
+    console.log(`log tooye ctl id : ${req.id}`);
     const admin_id = decodeToken(token).id
     if (!admin_id) {
         res.status(400).json({ success: false, error: "id is not identify" })
