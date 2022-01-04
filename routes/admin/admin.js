@@ -19,14 +19,14 @@ app.get('/', controller.getAllUser)
 app.post("/dashboard/request", controller.getAllRequest)
 
 // Travel
-app.post("/dashboard/travel", travelCtl.createTravel)
-app.delete("/dashboard/travel", travelCtl.deleteTravel)
-app.put("/dashboard/travel", travelCtl.updateTravel)
-app.get("/dashboard/travel/:travel_id", validator.tokenSchema, validator.travelIdSchema, travelCtl.getTravel)
-app.get("/dashboard/travel/info/:travel_id", validator.tokenSchema, validator.travelIdSchema, travelCtl.getTravelInfo)
+app.post("/dashboard/travel", verifytoken, travelCtl.createTravel)
+app.delete("/dashboard/travel", verifytoken, travelCtl.deleteTravel)
+app.put("/dashboard/travel", verifytoken, travelCtl.updateTravel)
+app.get("/dashboard/travel/:travel_id", validator.tokenSchema, validator.travelIdSchema, verifytoken, travelCtl.getTravel)
+app.get("/dashboard/travel/info/:travel_id", validator.tokenSchema, validator.travelIdSchema, verifytoken, travelCtl.getTravelInfo)
 
-app.get("/dashboard/travel/info/:travel_id/:user_id", validator.tokenSchema, validator.travelIdSchema, validator.userIdSchema, passengerCtl.searchUserInTravel)
-app.get("/dashboard/travel/size/:travel_id", validator.tokenSchema, validator.travelIdSchema, verifytoken, travelCtl.getSizePassengerTravel)
+app.get("/dashboard/travel/info/:travel_id/:user_id", validator.tokenSchema, validator.travelIdSchema, validator.userIdSchema, verifytoken, passengerCtl.searchUserInTravel)
+app.get("/dashboard/travel/size/:travel_id", validator.tokenSchema, validator.travelIdSchema, verifytoken, verifytoken, travelCtl.getSizePassengerTravel)
 
 
 

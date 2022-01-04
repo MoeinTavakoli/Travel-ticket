@@ -9,11 +9,7 @@ async function createTravel(req, res) { //
 
         const { source, destination, cost } = req.body
 
-        const token = req.headers.token
-        const admin_id = decodeToken(token).id
-        if (!admin_id) {
-            res.status(400).json({ success: false, error: "id is not identify" })
-        }
+        const admin_id = req.id
 
         const result = await addTravel(admin_id, source, destination, cost)
         if (result) {
@@ -34,12 +30,6 @@ async function deleteTravel(req, res) { //
     try {
 
         const { travel_id } = req.body
-
-        const token = req.headers.token
-        const admin_id = decodeToken(token).id
-        if (!admin_id) {
-            res.status(400).json({ success: false, error: "id is not identify" })
-        }
 
         const rowCountEffected = await removeTravel(travel_id)
         if (rowCountEffected == 0) {
@@ -62,12 +52,6 @@ async function updateTravel(req, res) {
 
         const { travel_id, source, destination, cost } = req.body
 
-        const token = req.headers.token
-        const admin_id = decodeToken(token).id
-        if (!admin_id) {
-            return res.status(400).json({ success: false, error: "id is not identify" })
-        }
-
         const rowCountEffected = await editTravel(travel_id, source, destination, cost)
         if (rowCountEffected == 0) {
             res.status(400).json({ success: false, message: "travel didint edit ! " })
@@ -88,8 +72,7 @@ async function getTravel(req, res) {
     try {
         const travel_id = req.params.travel_id
 
-        const token = req.headers.token
-        const admin_id = decodeToken(token).id
+        const admin_id = req.id
         if (!admin_id) {
             res.status(400).json({ success: false, error: "id is not identify" })
         }
