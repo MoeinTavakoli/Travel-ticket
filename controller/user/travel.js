@@ -16,8 +16,9 @@ async function reserveTravel(req, res) {
         if (!resultArray) {
             return res.status(400).json({ success: false, error: "travel not found " })
         }
+        console.log(resultArray);
         const array = resultArray.rows[0].passengers_id
-
+        console.log(array);
         const existItem = isInArray(array, user_id)
 
         if (existItem) {
@@ -31,6 +32,7 @@ async function reserveTravel(req, res) {
         }
         else { res.json({ success: true, message: "reserve succesfuly ... " }) }
     } catch (error) {
+        console.log(error);
         res.status(500).json({ success: false, error })
     }
 }

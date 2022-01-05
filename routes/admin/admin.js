@@ -9,6 +9,7 @@ const validator = require("../../service/joi/schema")
 
 const verifytoken = require("../../service/jwt/middleware")
 
+
 app.post('/signup', validator.signupSchema, controller.signup)
 
 app.post('/login', validator.loginSchema, controller.login)
@@ -16,7 +17,7 @@ app.post('/login', validator.loginSchema, controller.login)
 app.get('/', controller.getAllUser)
 
 // request
-app.post("/dashboard/request", controller.getAllRequest)
+app.get("/dashboard/request", controller.getAllRequest)
 
 // Travel
 app.post("/dashboard/travel", verifytoken, travelCtl.createTravel)

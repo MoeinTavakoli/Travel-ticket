@@ -8,7 +8,6 @@ async function createTravel(req, res) { //
     try {
 
         const { source, destination, cost } = req.body
-
         const admin_id = req.id
 
         const result = await addTravel(admin_id, source, destination, cost)
@@ -109,6 +108,9 @@ async function getSizePassengerTravel(req, res) {
         return res.status(400).json({ success: false, error: "travel not found " })
     }
     const array = resultArray.rows[0].passengers_id
+    if (array == null) {
+        return res.status(200).json({ "travel lenght reserved ": 0 })
+    }
     res.status(200).json({ "travel lenght reserved ": array.length })
 }
 
