@@ -11,8 +11,7 @@ require("./db/connection")
 
 app.use('/user', require("./routes/user"))
 app.use('/admin', require('./routes/admin'))
-
-app.post('/user/request')
+app.use('/', require("./routes/main"))
 
 
 app.listen(port = 3000, () => {
