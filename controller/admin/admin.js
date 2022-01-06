@@ -12,7 +12,10 @@ async function signup(req, res) {
             return res.status(400).json({ error: "user is exist" })
         }
         const result = await signupDB(username, password, "admin")
-        return res.send(result)
+        if (result) {
+            return res.status(200).json({ success: true, result })
+        }
+        res.status(400).json({ success: false, result })
     }
     catch (err) {
         throw err

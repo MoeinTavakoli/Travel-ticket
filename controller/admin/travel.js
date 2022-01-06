@@ -7,10 +7,10 @@ const { getPassngersTravel } = require("../../db/user-travel")
 async function createTravel(req, res) { //
     try {
 
-        const { source, destination, cost } = req.body
+        const { source, destination, cost, type } = req.body
         const admin_id = req.id
 
-        const result = await addTravel(admin_id, source, destination, cost)
+        const result = await addTravel(admin_id, source, destination, cost, type)
         if (result) {
             res.status(200).json({ success: true, message: "travel added ..." })
         }
