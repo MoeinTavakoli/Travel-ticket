@@ -169,16 +169,7 @@ COPY public.request (req_id, user_id, date, source, destination) FROM stdin;
 --
 
 COPY public.travel (travel_id, admin_id, source, destination, cost, passengers_id, type, size, date) FROM stdin;
-4	4	mashhad	LA	100	\N	train	100	2022-02-17
-6	4	mashhad	LA	100	\N	train	100	2022-02-17
-7	4	edit source	edit des	2300	{2}	train	100	2022-02-17
 10	4	mashhad	LA	100	\N	train	100	2022-02-17
-11	4	mashhad	kakhk	9900	{2,5}	plain	100	2022-02-17
-13	7	edit mabda	edit des	2501	\N	\N	100	2022-02-17
-15	7	mashhad	toroq	850	\N	\N	20	2022-02-17
-16	7	mashhad	toroq	850	\N	\N	20	\N
-17	7	mashhad	toroq	850	\N	\N	20	\N
-18	7	mashhad	toroq	850	\N	train	20	2022-05-22
 19	7	invar	oonvar	100	\N	plain	25	2022-05-22
 \.
 
@@ -188,13 +179,6 @@ COPY public.travel (travel_id, admin_id, source, destination, cost, passengers_i
 --
 
 COPY public.users (id, username, password, birthday, city, role) FROM stdin;
-2	user1	$2a$10$ejceehrwm4/fVuxayGiq3e059x/UMMxvJ1vKzI.E25MfruZho.tUS	\N	\N	user
-1	test1	$2a$10$ejceehrwm4/fVuxayGiq3e059x/UMMxvJ1vKzI.E25MfruZho.tUS	\N	\N	user
-3	user2	$2a$10$ejceehrwm4/fVuxayGiq3e059x/UMMxvJ1vKzI.E25MfruZho.tUS	\N	\N	user
-4	admin1	$2a$10$ejceehrwm4/fVuxayGiq3e059x/UMMxvJ1vKzI.E25MfruZho.tUS	\N	\N	admin
-5	moein	$2a$10$ejceehrwm4/fVuxayGiq3e059x/UMMxvJ1vKzI.E25MfruZho.tUS	\N	\N	user
-6	newadmin1	$2a$10$ejceehrwm4/fVuxayGiq3e059x/UMMxvJ1vKzI.E25MfruZho.tUS	\N	\N	admin
-7	newadmin2	$2a$10$ejceehrwm4/fVuxayGiq3e059x/UMMxvJ1vKzI.E25MfruZho.tUS	\N	\N	admin
 \.
 
 
