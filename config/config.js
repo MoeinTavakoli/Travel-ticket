@@ -1,14 +1,15 @@
+require('dotenv').config()
 
 const config = {
     databse: {
-        host: '127.0.0.1',
-        user: 'postgres',
-        database: 'travel',
-        password: '2283',
-        port: 5432,
+        host: process.env.DATABASE_HOST,
+        user: process.env.DATABASE_USER,
+        database: process.env.DATABASE_NAME,
+        password: process.env.DATABASE_PASSWORD,
+        port: process.env.DATABASE_PORT,
     },
     jwt: {
-        secret: "asdasdloska"
+        secret: process.env.JWT_SECRET
     }
 }
 

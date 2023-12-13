@@ -2,11 +2,20 @@ const { Client } = require('pg');
 const dbConfig = require("../config").databse
 
 
-const client = new Client(dbConfig);
+try {
+} catch (error) {
 
+}
 
-
-
+(function databaseConnection() {
+    try {
+        const client = new Client(dbConfig);
+        return client
+    } catch (error) {
+        console.log(error);
+    }
+})
+    ()
 
 
 

@@ -1,0 +1,41 @@
+version: '3.3'
+services:
+  api:
+    container_name: travel-api
+    build:
+      context: ./
+    image: travel-ticket
+    depends_on:
+     - db
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_PORT : ${DATABASE_PORT}
+      SERVER_PORT: ${SERVER_PORT}
+      JWT_SECRET: ${JWT_SECRET}
+    # volumes:
+    #   - './:/src'
+    links:
+     - db
+
+  db:
+   image: postgres:14.1-alpine
+   container_name: travel-db
+   restart: always
+   environment:
+     POSTGRES_USER: ${DATABASE_USER}
+     POSTGRES_DB: ${DATABASE_NAME}
+     POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+   ports:
+     - '5432:5432'
+   volumes:
+     - $PWD/db/init/travel.sql:/docker-entrypoint-initdb.d/initdb.sql
+     - /tmp/travel-database/:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
